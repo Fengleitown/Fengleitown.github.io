@@ -1,6 +1,11 @@
+>本博客基于小傅哥的底版搭建详细搭建博客文档：
+>[https://mp.weixin.qq.com/s/aK9Z9RkqWMUpcNzUREEx4Q](https://mp.weixin.qq.com/s/aK9Z9RkqWMUpcNzUREEx4Q)
+
+<!-- 
+    注释掉傅哥的readme
 # 教小白使用 docsify，搭建一个贼简单的所见即所得博客！ 🔥
 
->你好，我是小傅哥，[《重学Java设计模式》](https://item.jd.com/13218336.html) 图书作者，一线互联网 Java 工程师、架构师。
+你好，我是小傅哥，[《重学Java设计模式》](https://item.jd.com/13218336.html) 图书作者，一线互联网 Java 工程师、架构师。
 
 ## 博客搭建
 
@@ -40,4 +45,5 @@
     
     <img src="https://bugstack.cn/images/personal/qrcode.png" width="180" height="180"/>
 
+    -->
     
