@@ -1,14 +1,11 @@
 - [:octocat: 首页](/README)
-- :memo: 目录
+- :memo:  目录
    - [github.io的语法学习](/md/面试八股文笔记/github.io的语法学习.md)
-   - # [面试篇]
-       - ## 微服务篇
-            - ### [Dubbo相关](/md/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
-            - SpringCloudAlibaba相关  
-       - ## MySQL篇
-            - mysql的索引及数据结构   
+   - 面试篇
+     - [微服务篇](docs/md/面试八股文笔记/微服务篇)
+       - [Dubbo相关](/md/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
+       - SpringCloudAlibaba相关  
+     - MySQL篇
+                 - mysql的索引及数据结构   
      
-   - # 学习篇
-       - ## 我要主动学习SpringCloud
-            - ### [我能学出来个啥？这里后面的()引用啥也不写默认跳转到 _coverpage.md ]()
-            - [这里我指定的话就会指定了](/md/idea-plugin/2021-11-03-第二节：配置窗体和侧边栏窗体的使用.md)
+  
