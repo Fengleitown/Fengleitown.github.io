@@ -1,10 +1,10 @@
 - [:octocat: 首页](/README)
 - :memo: 目录
-   - [github.io的语法学习](github.io的语法学习)
+   - [github.io的语法学习](/面试八股文笔记/github.io的语法学习.md)
    - 面试篇
        - 微服务篇
             - Dubbo相关
-                - [好好学习这个语法，这里套用一个md文件，来接下来弄三级目录下面的东西](2021-08-27-技术调研IDEA插件怎么开发.md)
+                - [好好学习这个语法，这里套用一个md文件，来接下来弄三级目录下面的东西](/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
             - SpringCloudAlibaba相关  
        - MySQL篇
             - mysql的索引及数据结构   
