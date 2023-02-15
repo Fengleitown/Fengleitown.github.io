@@ -1,5 +1,5 @@
->本博客基于小傅哥的模版搭建详细搭建博客文档：
->[https://mp.weixin.qq.com/s/aK9Z9RkqWMUpcNzUREEx4Q](https://mp.weixin.qq.com/s/aK9Z9RkqWMUpcNzUREEx4Q)
+>Hello World，欢迎来到我的博客！🔥
+>[欢迎来我的世界瞅瞅👉](https://fengleitown.github.io/)
 
 <!-- 
     注释掉傅哥的readme
