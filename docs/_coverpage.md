@@ -2,9 +2,6 @@
 
 [logo](_media/1024.png)
 
-[//]: # ([logo]&#40;_media/R-C.gif&#41;)
-
-
 # Hello World ！ 欢迎来到我的世界！
 
 ## Believe you can and you're halfway there.
