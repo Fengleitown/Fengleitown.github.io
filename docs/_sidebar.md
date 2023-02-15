@@ -1,12 +1,20 @@
 - [:octocat: 首页](/README)
 - :memo:  目录
-    - [github.io的语法学习](/md/面试八股文笔记/github.io的语法学习.md)
-      - _**<font size="5">面试篇</font>**_    
-          - <font color="#AD523D" size="4">微服务篇</font>
-              - [Dubbo相关](/md/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
-              - ![复制的图像链接](https://cdn.nlark.com/yuque/0/2023/png/34719573/1676339883280-306d3efc-211b-4468-a61e-aa60a34b1974.png)
-          - MySQL篇
-              - mysql的索引及数据结构   
- 
-     
+  - **<font color="#AD523D" size="4">面试篇</font>**    
+    - [自我介绍](/md/Interview-eight-part-essay/IntroduceMyself.md)
+    - [JAVA基础](/md/Interview-eight-part-essay/JAVABasics.md)
+    - [线程并发](/md/Interview-eight-part-essay/ThreadConcurrency.md) 
+    - [数据库](/md/Interview-eight-part-essay/Database.md)
+    - [NoSQL](/md/Interview-eight-part-essay/NoSQL.md)
+    - [Spring、SpringBoot](/md/Interview-eight-part-essay/Spring、SpringBoot.md)
+    - [设计模式](/md/Interview-eight-part-essay/DesignPattern.md)
+    - [微服务](/md/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
+    - [MQ](/md/Interview-eight-part-essay/MQ.md)
+    - [Elasticsearch](/md/Interview-eight-part-essay/ES.md)
+    - [JVM](/md/Interview-eight-part-essay/JVM.md)
+    - [面试场景](/md/Interview-eight-part-essay/InterviewScene.md)
+    - [工作中问题及方案](/md/Interview-eight-part-essay/WorkProblems.md)
+  - **<font color="#AD523D" size="4">技能学习篇</font>**     
+  - **<font color="#AD523D" size="4">自己折腾篇</font>**
+  
 
