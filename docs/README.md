@@ -16,7 +16,7 @@
 
 `先不说了，陪强哥喝杯茶先`
 
-![](/assets/img/ext-img/高启强喝茶.jpg)
+![](/assets/img/ext-img/高启强喝茶1.jpg)
 
 我没有什么其他想说的，copy一下`chatGPT`的回答作为我的序：
 

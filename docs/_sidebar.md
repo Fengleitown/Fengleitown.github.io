@@ -1,6 +1,6 @@
 - [:octocat: 首页](/README)
 - :memo:  目录
-  - **<font color="#AD523D" size="4">面试篇(初中级糊弄版)</font>**    
+  - **<font color="#AD523D" size="4">面试篇</font>**(初中级糊弄版)
     - [自我介绍](/md/Interview-eight-part-essay/IntroduceMyself.md)
     - [JAVA基础](/md/Interview-eight-part-essay/JAVABasics.md)
     - [线程并发](/md/Interview-eight-part-essay/ThreadConcurrency.md) 
@@ -14,7 +14,7 @@
     - [JVM](/md/Interview-eight-part-essay/JVM.md)
     - [面试场景](/md/Interview-eight-part-essay/InterviewScene.md)
     - [工作中问题及方案](/md/Interview-eight-part-essay/WorkProblems.md)
-  - **<font color="#AD523D" size="4">面试篇(中高级走心版)</font>** 
+  - **<font color="#AD523D" size="4">面试篇</font>**(中高级走心版) 
     - [基础篇](/md/Serious-eight-part-essay//JAVA/JAVA.md)
     - [并发篇](/md/Serious-eight-part-essay/Concurrency.md)
     - [虚拟机](/md/Serious-eight-part-essay/JVMChapter.md) 

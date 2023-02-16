@@ -36,3 +36,37 @@
 5. 当 L => R 时，表示没有找到，应结束循环
 
 *[更形象的图示演示请参考 👉 binary_search.html](/md/Serious-eight-part-essay/JAVA/binary_search.html)*
+
+**算法实现和测试：**
+
+```java
+public class BinarySearch {
+    // 测试
+    public static void main(String[] args) {
+        BinarySearch binarySearch = new BinarySearch();
+        int[] array = {1, 12, 23, 54, 55, 66, 67, 80, 99};
+        int temp = 55;
+        String shuo = binarySearch.binarySearch(array,temp);
+        System.out.println(shuo);
+    }
+    // 算法实现
+    public String binarySearch(int [] array,int temp) {
+        int l =0;   int r =array.length-1;
+        while (l<=r) {
+            int model = (l+r) / 2;
+            if (temp == array[model]) {
+                return "是这个数    "+temp;
+            } else if (temp > array[model]) {
+               l=model+1;
+
+            } else if(temp < array[model]){
+                r=model-1;
+            }
+        }
+        return "没找着";
+    }
+}
+
+```
+
+
