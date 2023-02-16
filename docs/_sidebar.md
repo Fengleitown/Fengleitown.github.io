@@ -15,10 +15,15 @@
     - [面试场景](/md/Interview-eight-part-essay/InterviewScene.md)
     - [工作中问题及方案](/md/Interview-eight-part-essay/WorkProblems.md)
   - **<font color="#AD523D" size="4">面试篇(中高级走心版)</font>** 
-    - [基础篇](/md/Interview-eight-part-essay/JAVA.md)
-    - [并发篇](/md/Interview-eight-part-essay/Concurrency.md)
-    - [虚拟机](/md/Interview-eight-part-essay/JVMChapter.md) 
-    - [框架篇](/md/Interview-eight-part-essay/Frame.md) 
+    - [基础篇](/md/Serious-eight-part-essay//JAVA/JAVA.md)
+    - [并发篇](/md/Serious-eight-part-essay/Concurrency.md)
+    - [虚拟机](/md/Serious-eight-part-essay/JVMChapter.md) 
+    - [框架篇](/md/Serious-eight-part-essay/Frame.md) 
+
+ 
+ 
+ 
+ 
   - **<font color="#AD523D" size="4">技能学习篇</font>**     
   - **<font color="#AD523D" size="4">自己折腾篇</font>**
   
