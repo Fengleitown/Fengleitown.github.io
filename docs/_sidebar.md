@@ -15,7 +15,7 @@
     - [面试场景](/md/Interview-eight-part-essay/InterviewScene.md)
     - [工作中问题及方案](/md/Interview-eight-part-essay/WorkProblems.md)
   - **<font color="#AD523D" size="4">面试篇</font>**(中高级走心版) 
-    - [基础篇](/md/Serious-eight-part-essay//JAVA/JAVA.md)
+    - [基础篇](/md/Serious-eight-part-essay/JAVA/JAVA.md)
     - [并发篇](/md/Serious-eight-part-essay/Concurrency.md)
     - [虚拟机](/md/Serious-eight-part-essay/JVMChapter.md) 
     - [框架篇](/md/Serious-eight-part-essay/Frame.md) 
