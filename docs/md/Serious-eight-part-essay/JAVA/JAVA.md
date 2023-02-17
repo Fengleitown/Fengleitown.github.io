@@ -36,7 +36,7 @@
 
 *[更形象的图示演示请参考 👉 演示动画](docs/md/Serious-eight-part-essay/JAVA/binary_search.html)*
 
-**算法实现和测试：**
+**算法实现和测试：**（以jdk里的Arrays.binarySearch()方法来实现）
 
 ```java
 public class BinarySearch {
@@ -68,4 +68,50 @@ public class BinarySearch {
 
 ```
 
+**解决整数溢出问题**
 
+> *溢出过程详解*：
+
+```java
+public static void main(String[] args) {
+        int left = 0;
+        int right = Integer.MAX_VALUE - 1;
+        int middle = (left + right) / 2;
+        System.out.println(right);//2147483646
+        System.out.println(middle);//1073741823
+        // 得出中间值为 m = 10亿多，如果接下来再计算（int m =(l+r)/2 ），则会继续进行 l+r 运算，就等于30亿多了，超出了int的最大值。
+//        举例子
+//        在右侧
+        left = middle + 1;
+        middle = (left + right) / 2;
+        System.out.println(middle);//-536870913
+//        二进制运算，演示两个正整数相加变成负数，规则：逢 2 进 1，为 2 是 0.
+//        比如 126 + 63 规定在一个byte（8个bit）内且有符号， 则结果不是 189，而是 -67
+//         符号位，0代表正->   0 1 1 1  1 1 1 0      值为126
+//                        +  0 0 1 1  1 1 1 1      值为63
+//                           1 0 1 1  1 1 0 1      值为-67
+//
+//        方法一： (l + r)/2 ==> l - l/2 + r/2 ==> l + (r/2 - l/2) ==> l + (r-l)/2    利用大值先减去左边界后先除以2，这样即使再加上左边界也小了
+        middle = left + (right - left) / 2;
+        System.out.println(middle);//1610612735
+//        方法二；  用无符号的右移运算代替掉除法。  向右移一位
+        middle = (left + right) >>> 1;
+        System.out.println(middle);
+    }
+```
+
+当 l 和 r 都较大时，`l + r` 有可能超过整数范围，造成运算错误，解决方法有两种：
+
+相关面试题
+1 ．有一个有序表为 1 , 5 , 8 , 11 , 19 , 22 , 31 , 35 , 40 , 45 , 48 , 49 , 50 当二分查找值为 48 的结点时，查找成功需要比较的次数() 
+
+2 ．使用二分法在序列 1 , 4 , 6 , 7 , 15 , 33 , 39 , 50 , 64 , 78 , 75 , 81 , 89 , 96 中查找元素 81 时，需要经过（）次比较 
+
+3 ．在拥有一个 128 个元素的数组中二分查找一个数，需要比较的次数最多不超过多少次  
+
+-  $2^n$   = 128 或 128 /2 /2....直到 1
+- 问题转化为$log_2 128=7$, 计算器则是 $log_10 128/$log_10 2 = 7$  四舍五入取整。
+
+> 口诀：
+> 奇数二分取中间
+> 偶数二分取中间靠左
