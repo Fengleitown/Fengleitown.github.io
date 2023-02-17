@@ -77,7 +77,62 @@ public class Main {
 Meow
 Woof
 ```
-## 
+## 2.==和equals比较
+
+**回答**:`==`对比的是`栈`中的值，是基本数据类型是变量值。而`引用类型`是`堆中内存对象`的地址
+
+重写String的equals方法（）。
+
+```java
+	// Object
+    public boolean equals(Object obj) {
+        return (this == obj);
+    }
+    // String
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        if (anObject instanceof String) {
+            String anotherString = (String)anObject;
+            int n = value.length;
+            if (n == anotherString.value.length) {
+                char v1[] = value;
+                char v2[] = anotherString.value;
+                int i = 0;
+                while (n-- != 0) {
+                    if (v1[i] != v2[i])
+                        return false;
+                    i++;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+```
+
+上述代码可以看出，String类中被复写的equals()方法其实是比较两个字符串的内容。
+
+```java
+public class StringDemo {
+    public static void main(String args[]) {
+        String str1 = "Hello";
+        String str2 = new String("Hello");
+        String str3 = str2; // 引用传递 
+        System.out.println(str1 == str2); // false 
+        System.out.println(str1 == str3); // false 
+        System.out.println(str2 == str3); // true 
+        System.out.println(str1.equals(str2)); // true  两个字符串的内容相同
+        System.out.println(str1.equals(str3)); // true 
+        System.out.println(str2.equals(str3)); // true 
+    }
+}
+```
+
+**总结**：==比较栈中的引用值或者是值，equals()比较堆中两个字符串内容。Object中equals方法默认方法是==，但是一般都会重写，比如说string重写了object中equals的方法，比较的是两个字符数组的内容。例如上面代码。
+
+
 
 
 
