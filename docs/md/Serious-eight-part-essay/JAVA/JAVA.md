@@ -115,5 +115,114 @@ public static void main(String[] args) {
 -  问题转化为$log_2 128=7$, 计算器则是 $log_10 128/$log_10 2 = 7$  四舍五入取整。
 
    - 是整数，则整数即为最终结果
+   
    - 是小数，则舍去小数部分，整数加一为最终结果
+   
+
+------
+
+
+
+##  7.ArrayList
+
+**要求**
+
+* 掌握 ArrayList 扩容规则
+
+无参ArrayList ，初始值是空，即为0，代码如下：
+
+```java
+private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+
+public ArrayList() {
+        this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+    }
+```
+
+有参ArrayList ,初始值是整数，初始值是那个整数参数的大小，默认是10。
+
+```java
+private static final Object[] EMPTY_ELEMENTDATA = {};
+
+public ArrayList(int initialCapacity) {
+        if (initialCapacity > 0) {
+            this.elementData = new Object[initialCapacity];
+        } else if (initialCapacity == 0) {
+            this.elementData = EMPTY_ELEMENTDATA;
+        } else {
+            throw new IllegalArgumentException("Illegal Capacity: "+
+                                               initialCapacity);
+        }
+    }
+```
+
+有参ArrayList ，初始值是集合，初始值是集合元素个数：
+
+```java
+
+
+public ArrayList(Collection<? extends E> c) {
+        Object[] a = c.toArray();
+        if ((size = a.length) != 0) {
+            if (c.getClass() == ArrayList.class) {
+                elementData = a;
+            } else {
+                elementData = Arrays.copyOf(a, size, Object[].class);
+            }
+        } else {
+            // replace with empty array.
+            elementData = EMPTY_ELEMENTDATA;
+        }
+    }
+```
+
+**扩容**：
+
+ 在 Java 中，ArrayList 内部采用一个数组来存储元素，当数组的长度不足以容纳新的元素时，需要进行扩容操作。ArrayList 的扩容机制是每次扩容容量变为原来的 1.5 倍，也就是说，每次扩容后，数组的长度会变为原来的 1.5 倍。 
+
+**1.5 倍的来由：**
+
+原数组的元素个数值，右移一位，在二进制中，右移一位相当于除以2，得出数字后与原数组元素个数相加，得出结果为新数组大小，eg:原数组大小是15,15>>1，得7，15+7=22，即新数组大小为22。
+
+代码：
+
+```java
+private void ensureCapacityInternal(int minCapacity) {
+    // 如果 ArrayList 的容量不足以容纳新的元素
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        // 如果 ArrayList 内部数组还没有被初始化，则初始化一个默认长度为 10 的数组
+        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
+    }
+    // 如果需要扩容
+    if (minCapacity - elementData.length > 0)
+        grow(minCapacity);
+}
+
+/**
+ * 扩容方法
+ */
+private void grow(int minCapacity) {
+    // 扩容前的数组长度
+    int oldCapacity = elementData.length;
+    // 扩容后的数组长度，每次扩容为原来的 1.5 倍
+    int newCapacity = oldCapacity + (oldCapacity >> 1);
+    // 如果扩容后的数组长度依然无法容纳元素，则将数组长度设为 minCapacity(*要添加元素的个数，即新数组扩容后也无法满足大小，直接建要传入元素个数大小的数组*)
+    if (newCapacity - minCapacity < 0)
+        newCapacity = minCapacity;
+    // 将原来的数组拷贝到新的数组中
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}
+
+```
+
+**扩容规则总结**
+
+1. ArrayList() 会使用长度为零的数组
+2. ArrayList(int initialCapacity) 会使用指定容量的数组
+3. public ArrayList(Collection<? extends E> c) 会使用 c 的大小作为数组容量
+4. add(Object o) 首次扩容为 10，再次扩容为上次容量的 1.5 倍
+5. addAll(Collection c) 没有元素时，扩容为 Math.max(10, 实际元素个数)取两者之间最大值，有元素时为 Math.max(原容量 1.5 倍, 实际元素个数)
+
+------
+
 
