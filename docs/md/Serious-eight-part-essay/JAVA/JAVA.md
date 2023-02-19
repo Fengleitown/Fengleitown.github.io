@@ -2,7 +2,17 @@
 
 > ***注重：算法、数据结构、常见的设计模式***
 
-## 1.二分查找
+## 算法部分
+
+- 掌握常见排序算法（二分、冒泡、快排、选择、插入等）
+- 手写冒泡、快排的代码
+- 了解各个排序算法的特性，如时间复杂度、是否稳定
+
+------
+
+
+
+### 1.二分查找
 
 **要求**
 
@@ -121,9 +131,92 @@ public static void main(String[] args) {
 
 ------
 
+### 2. 冒泡排序
+
+**要求**
+
+* 能够用自己语言描述冒泡排序算法
+* 能够手写冒泡排序代码
+* 了解一些冒泡排序的优化手段
+
+**算法描述**
+
+1. 依次比较数组中相邻两个元素大小，若 a[j] > a[j+1]，则交换两个元素，两两都比较一遍称为一轮冒泡，结果是让最大的元素排至最后
+2. 重复以上步骤，直到整个数组有序
+
+**算法实现**（优化`外层`循环的循环比较次数——排好序的数组不需要再循环比较）
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        int[] array = {5, 9, 7, 4, 1, 3, 2, 8};
+        bubble(array);
+    }
+
+    public static void bubble(int[] array) {
+        int k;
+        for (int j = 0; j < array.length - 1 - j; j++) { // array.length- 1- j每轮少比一次
+            boolean swapped = false;// 是否发生了交换，避免已排好序又做交换操作，提升算法效率
+//        第一轮排序————挑出最大的排在最右边
+            for (int i = 0; i < array.length - 1; i++) {
+                 System.out.println("比较次数"+i);
+                if (array[i] > array[i + 1]) {
+                    swap(array, i, i + 1);
+                }
+            }
+            k=j+1;
+            System.out.println("第" + k + "轮" + Arrays.toString(array));
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+
+    public static void swap(int[] array, int i, int j) {
+        int t = array[i];
+        array[i] = array[j];
+        array[j] = t;
+    }
+}
+```
+
+**最优算法实现**（优化`内层`循环的循环比较次数——数组元素中后几位比较完的元素无需再比较）
+
+- 优化方式：每轮冒泡时，最后一次交换索引可以作为下一轮冒泡的比较次数，如果这个值为零，表示整个数组有序，直接退出外层循环即可。
+
+```java
+ public static void bubble_2(int[] array) {
+        int n = array.length - 1;//比较循环的次数
+        while (true) {
+            int last = 0;// 最后一次发生交换时的索引位置
+            for (int i = 0; i < n; i++) {
+                System.out.println("比较次数"+i);
+                if (array[i] > array[i + 1]) {
+                    swap(array, i, i + 1);
+                    last = i;// 每次循环后记录最后一次交换的索引位置
+
+                }
+            }
+            n = last;
+            System.out.println("第"+n+"轮循环冒泡排序"+Arrays.toString(array));
+            if (0 == n) {
+                break;
+            }
+        }
+    }
+```
 
 
-##  7.ArrayList
+
+
+
+
+
+------
+
+
+## 集合部分
+###  7.ArrayList
 
 **要求**
 
