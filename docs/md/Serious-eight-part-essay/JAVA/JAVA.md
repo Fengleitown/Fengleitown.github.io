@@ -206,7 +206,57 @@ public class Test {
     }
 ```
 
+### 3. 选择排序
 
+**要求**
+
+* 能够用自己语言描述选择排序算法
+* 能够比较选择排序与冒泡排序
+* 理解非稳定排序与稳定排序
+
+**算法描述**
+
+1. 将数组分为两个子集，排序的和未排序的，每一轮从未排序的子集中选出最小的元素，放入排序子集
+
+2. 重复以上步骤，直到整个数组有序
+
+<!-- **算法思路解析：**
+
+1.确定数组需要经过多少轮选择才能让数组有序 	eg:假设数组长度是8，则需要经过7轮选择，可以选出前7个数放入到有序部分，剩下的那个无需再选就是最大的了。
+
+2.每轮循环应查出的数是什么
+
+3.
+-->
+```java
+public class Test {
+    public static void main(String[] args) {
+        int[] array = {5, 3, 7, 2, 1, 9, 8, 4};
+        selection(array);
+    }
+    public static void selection(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+//                i 代表每轮选择最小元素要交换到的目标索引
+            int s =i; // 代表最小元素的索引值
+            for (int j = s+1; j < array.length; j++) {   // 此循环为了找出最小的那个索引，找出后放到最小的索引位置，
+                if (array[s] > array[j]) { // j 元素比 s 元素还要小, 更新 s
+                    s = j;   //  最小值放到s的索引上
+                }
+            }
+            if (s!=i) { //  将当前最小数据值与此次循环的开始位置数据做交换。
+                swap(array,s,i);
+            }
+            System.out.println(Arrays.toString(array));
+        }
+    }
+    public static void swap(int[] array, int i, int j) {
+//        i 最小元素的索引值 j
+        int t = array[i];
+        array[i] = array[j];
+        array[j] = t;
+    }
+}
+```
 
 
 
@@ -347,6 +397,6 @@ private void grow(int minCapacity) {
   - 占用内存多（有很多Node节点，节点有三个属性，分别是 上个元素下标、元素、下个元素下标，除此之外还有头尾结点等，所以占用内存较大。）
   
   **总结**：综合来看，平均使用ArrayList效率高，大多数情况都是用ArrayList。除非是头插，则用LinkedList。
-  
-  
+
+
 
