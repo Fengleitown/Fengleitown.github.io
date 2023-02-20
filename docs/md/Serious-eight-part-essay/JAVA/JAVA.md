@@ -337,7 +337,7 @@ private void grow(int minCapacity) {
       - 2.局部性原理，将数据读取后放到cpu缓存中，操作系统会把相邻数据也放到cpu缓存中，这样的操作对数组很有利，但链表就不行，链表读取到相邻元素后，可能是没用的，因为他的内存地址是随机的,而且cpu缓存空间大小也有限，等下次根据局部性原理将相关数据放到cpu缓存中时，可能会将之前的数据覆盖掉。
 
 
-![cpu缓存](docs/assets/img/ext-img/cpu缓存.jpg)
+![cpu缓存](/assets/img/ext-img/cpu缓存.jpg)
 
 - LinkedList
 
