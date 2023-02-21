@@ -119,7 +119,7 @@
 
 **条件变量**
 
-* ReentrantLock 中的条件变量功能类似于普通 synchronized 的 wait，notify，用在当线程获得锁后，发现条件不满足时，临时等待的链表结构
+* ReentrantLock 中的条件变量功能类似于普通 synchronized 的 wait，notify，用在当线程获得锁后，发现条件不满足时，临时等待的链表结构。eg：此时t2获得锁，但是不具备往下运行的条件参数，此时可以c2.await()，放到c2的waiting queue队列中。后面条件满足可以继续运行时，可以c2.signal()唤醒c2中waiting queue队列的线程，被唤醒后的线程进入到blocked queue尾端。
 * 与 synchronized 的等待集合不同之处在于，ReentrantLock 中的条件变量可以有多个，可以实现更精细的等待、唤醒控制
 [代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中TestReentrantLock
 
