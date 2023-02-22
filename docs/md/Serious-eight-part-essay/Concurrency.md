@@ -8,7 +8,7 @@
 * 掌握 Java 线程状态转换
 * 能理解五种状态与六种状态两种说法的区别
 
-![](/docs/assets/img/ext-img/线程6种状态.jpg)
+![](/assets/img/ext-img/线程6种状态.jpg)
 
 `新建——>可运行`当线程new一个时，还是个Java对象，此时还没有和操作系统底层真正的线程关联起来，此时仅是个Java对象，当Java对象调用了线程的start()时，会变成可运行状态，此变了可运行状态后，才会与真正的线程关联起来。里面的代码也会由操作系统交给cpu去执行。
 
@@ -42,9 +42,9 @@
    3. 丢弃任务 java.util.concurrent.ThreadPoolExecutor.DiscardPolicy
    4. 丢弃最早排队任务 java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy
 
-![](docs/assets/img/ext-img/线程池核心参数.jpg)
+![](/assets/img/ext-img/线程池核心参数.jpg)
 
-[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)![](https://badgen.net/github/stars/Fengleitown/fengleitown.github.io?icon=github&color=4ab8a1)中TestThreadPoolExecutor，TestThreadState类
+>[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)![](https://badgen.net/github/stars/Fengleitown/fengleitown.github.io?icon=github&color=4ab8a1)中TestThreadPoolExecutor，TestThreadState类
 
 ## 3. wait vs sleep
 面试题：对比sleep和wait方法。
@@ -75,7 +75,7 @@
   * wait 方法执行后会释放对象锁，允许其它线程获得该对象锁（我放弃 cpu，但你们还可以用）
   * 而 sleep 如果在 synchronized 代码块中执行，并不会释放对象锁（我放弃 cpu，你们也用不了）
 
-[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中WaitVsSleep
+>[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中WaitVsSleep
 
 ## 4.lock vs synchronized
 
@@ -126,7 +126,7 @@
 
 * ReentrantLock 中的条件变量功能类似于普通 synchronized 的 wait，notify，用在当线程获得锁后，发现条件不满足时，临时等待的链表结构。eg：此时t2获得锁，但是不具备往下运行的条件参数，此时可以c2.await()，放到c2的waiting queue队列中。后面条件满足可以继续运行时，可以c2.signal()唤醒c2中waiting queue队列的线程，被唤醒后的线程进入到blocked queue尾端。
 * 与 synchronized 的等待集合不同之处在于，ReentrantLock 中的条件变量可以有多个，可以实现更精细的等待、唤醒控制
-[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中TestReentrantLock
+>[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中TestReentrantLock
 
 ## 5. volatile
 
@@ -143,3 +143,10 @@
 - 原子性举例
 - 可见性举例
 - 有序性举例
+
+volatile是使用`内存屏障`来解决指令重排序，使用volatile修饰变量后，读和写的操作会分别加入不同的内存屏障。读时，内存屏障是这样的∨,阻止上面的代码越过屏障排上去，写时,内存屏障是这样∧，阻止下面代码越过屏障排下来。所以用volatile关键字修饰变量时，如果是读操作，修饰下面的变量，写操作，修饰上面的变量。
+
+eg: x=1;													volatile x=1;
+
+​	volatile  y=1;		这是读操作		    y=1;		  		这是写操作
+
