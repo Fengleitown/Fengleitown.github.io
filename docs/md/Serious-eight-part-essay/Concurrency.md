@@ -165,7 +165,7 @@
 >       注意：本例经实践检验是编译器优化导致的可见性问题
 >[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02.threadsafe)中Reordering 演示有序性
 >  * 需要打成 jar 包后测试
->* [请同时参考视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=79&vd_source=add76bce03794ff30f98753a5213643b)
+>* [可同时参考视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=79&vd_source=add76bce03794ff30f98753a5213643b)
 
 
 
@@ -194,3 +194,14 @@ eg: x=1;													volatile x=1;
   * 由于线程一直运行，不需要阻塞，因此不涉及线程上下文切换
   * 它需要多核 cpu 支持，且线程数不应超过 cpu 核数
 
+CAS一般和volatile一起使用。主要方法就是
+
+```java
+account:一个对象	BALANCE:静态变量	old:旧值	news:新值	
+U.compareAndSetInt(account, BALANCE, old, news)
+//防止多线程情况下静态变量被篡改或者是覆盖新值，就引用了这个方法.
+//拿到静态变量balance的值，与old多比较，相同则说明没有其他线程来改变静态变量的值。则我可以修改成功。
+//如果拿到静态变量balance的值!=old，则compareAndSetInt()就修改失败
+```
+
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中SyncVsCas
