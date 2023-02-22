@@ -1,5 +1,7 @@
 ## 1. 线程状态
 
+面试题：线程有哪些状态？
+
 **要求**
 
 * 掌握 Java 线程六种状态
@@ -19,6 +21,8 @@
 
 
 ## 2.线程池的核心参数
+
+面试题：线程池的核心参数。
 
 **要求**
 
@@ -42,6 +46,8 @@
 [代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)![](https://badgen.net/github/stars/Fengleitown/fengleitown.github.io?icon=github&color=4ab8a1)中TestThreadPoolExecutor，TestThreadState类
 
 ## 3. wait vs sleep
+面试题：对比sleep和wait方法。
+
 **要求**
 
 * 能够说出二者区别
@@ -69,7 +75,10 @@
   * 而 sleep 如果在 synchronized 代码块中执行，并不会释放对象锁（我放弃 cpu，你们也用不了）
 
 [代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中WaitVsSleep
+
 ## 4.lock vs synchronized
+
+面试题：对比lock 和 synchronized
 
 **要求**
 
@@ -118,3 +127,18 @@
 * 与 synchronized 的等待集合不同之处在于，ReentrantLock 中的条件变量可以有多个，可以实现更精细的等待、唤醒控制
 [代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中TestReentrantLock
 
+## 5. volatile
+
+面试题：volatile能否保证线程安全？
+
+1.线程安全要考虑三个方面：**可见性、有序性、原子性**。
+
+- 可见性指：一个线程对共享变量修改，另一线程能看到最新的结果。
+- 有序性指：一个线程内代码按编写顺序执行
+- 原子性指：一个线程内多行代码以一个整体运行，期间不能有其它线程代码插队
+
+2.volatile能保证共享变量的可见性与有序性，但并不能保证原子性
+
+- 原子性举例
+- 可见性举例
+- 有序性举例
