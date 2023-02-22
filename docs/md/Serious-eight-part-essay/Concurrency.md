@@ -44,7 +44,7 @@
 
 ![](/assets/img/ext-img/线程池核心参数.jpg)
 
->[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)![](https://badgen.net/github/stars/Fengleitown/fengleitown.github.io?icon=github&color=4ab8a1)中TestThreadPoolExecutor，TestThreadState类
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)![](https://badgen.net/github/stars/Fengleitown/fengleitown.github.io?icon=github&color=4ab8a1)中TestThreadPoolExecutor，TestThreadState类
 
 ## 3. wait vs sleep
 面试题：对比sleep和wait方法。
@@ -75,7 +75,7 @@
   * wait 方法执行后会释放对象锁，允许其它线程获得该对象锁（我放弃 cpu，但你们还可以用）
   * 而 sleep 如果在 synchronized 代码块中执行，并不会释放对象锁（我放弃 cpu，你们也用不了）
 
->[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中WaitVsSleep
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中WaitVsSleep
 
 ## 4.lock vs synchronized
 
@@ -126,7 +126,7 @@
 
 * ReentrantLock 中的条件变量功能类似于普通 synchronized 的 wait，notify，用在当线程获得锁后，发现条件不满足时，临时等待的链表结构。eg：此时t2获得锁，但是不具备往下运行的条件参数，此时可以c2.await()，放到c2的waiting queue队列中。后面条件满足可以继续运行时，可以c2.signal()唤醒c2中waiting queue队列的线程，被唤醒后的线程进入到blocked queue尾端。
 * 与 synchronized 的等待集合不同之处在于，ReentrantLock 中的条件变量可以有多个，可以实现更精细的等待、唤醒控制
->[代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中TestReentrantLock
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中TestReentrantLock
 
 ## 5. volatile
 
@@ -140,13 +140,57 @@
 
 2.volatile能保证共享变量的可见性与有序性，但并不能保证原子性
 
-- 原子性举例
-- 可见性举例
-- 有序性举例
+**原子性**
+* 起因：多线程下，不同线程的**指令发生了交错**导致的共享变量的读写混乱
+* 解决：用悲观锁或乐观锁解决，volatile 并不能解决原子性
+
+**可见性**
+
+* 起因：由于**编译器优化、或缓存优化、或 CPU 指令重排序优化**导致的对共享变量所做的修改另外的线程看不到
+* 解决：用 volatile 修饰共享变量，能够防止编译器等优化发生，让一个线程对共享变量的修改对另一个线程可见
+
+**有序性**
+
+* 起因：由于**编译器优化、或缓存优化、或 CPU 指令重排序优化**导致指令的实际执行顺序与编写顺序不一致
+* 解决：用 volatile 修饰共享变量会在读、写共享变量时加入不同的屏障，阻止其他读写操作越过屏障，从而达到阻止重排序的效果
+* 注意：
+  * **volatile 变量写**加的屏障是阻止上方其它写操作越过屏障排到 **volatile 变量写**之下
+  * **volatile 变量读**加的屏障是阻止下方其它读操作越过屏障排到 **volatile 变量读**之上
+  * volatile 读写加入的屏障只能防止同一线程内的指令重排
+
+> ***代码说明***
+
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02.threadsafe)中AddAndSubtract 演示原子性
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02.threadsafe)中ForeverLoop 演示可见性
+>       注意：本例经实践检验是编译器优化导致的可见性问题
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02.threadsafe)中Reordering 演示有序性
+>  * 需要打成 jar 包后测试
+>* [请同时参考视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=79&vd_source=add76bce03794ff30f98753a5213643b)
+
+
 
 volatile是使用`内存屏障`来解决指令重排序，使用volatile修饰变量后，读和写的操作会分别加入不同的内存屏障。读时，内存屏障是这样的∨,阻止上面的代码越过屏障排上去，写时,内存屏障是这样∧，阻止下面代码越过屏障排下来。所以用volatile关键字修饰变量时，如果是读操作，修饰下面的变量，写操作，修饰上面的变量。
 
 eg: x=1;													volatile x=1;
 
 ​	volatile  y=1;		这是读操作		    y=1;		  		这是写操作
+
+## 6. 悲观锁 vs 乐观锁
+
+**要求**
+
+* 掌握悲观锁和乐观锁的区别
+
+**对比悲观锁与乐观锁**
+
+* 悲观锁的代表是 synchronized 和 Lock 锁
+  * 其核心思想是【线程只有占有了锁，才能去操作共享变量，每次只有一个线程占锁成功，获取锁失败的线程，都得停下来等待】
+  * 线程从运行到阻塞、再从阻塞到唤醒，涉及线程上下文切换，如果频繁发生，影响性能
+  * 实际上，线程在获取 synchronized 和 Lock 锁时，如果锁已被占用，都会做几次重试操作，`减少阻塞`的机会
+
+* 乐观锁的代表是 AtomicInteger，使用 cas 来保证原子性
+
+  * 其核心思想是【无需加锁，每次只有一个线程能成功修改共享变量，其它失败的线程不需要停止，不断重试直至成功】
+  * 由于线程一直运行，不需要阻塞，因此不涉及线程上下文切换
+  * 它需要多核 cpu 支持，且线程数不应超过 cpu 核数
 
