@@ -41,7 +41,7 @@
    2. 由调用者执行任务 java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy
    3. 丢弃任务 java.util.concurrent.ThreadPoolExecutor.DiscardPolicy
    4. 丢弃最早排队任务 java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy
-![ ](docs/assets/img/ext-img/线程池核心参数.jpg)
+![](docs/assets/img/ext-img/线程池核心参数.jpg)
 
 [代码示例👉https://github.com/Fengleitown/BLOG-code](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)![](https://badgen.net/github/stars/Fengleitown/fengleitown.github.io?icon=github&color=4ab8a1)中TestThreadPoolExecutor，TestThreadState类
 
