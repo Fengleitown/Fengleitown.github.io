@@ -388,7 +388,24 @@ private void grow(int minCapacity) {
 
 ------
 
-### 8.LinkedList
+### 8. Iterator
+
+**要求**
+
+* 掌握什么是 Fail-Fast、什么是 Fail-Safe
+
+Fail-Fast 与 Fail-Safe
+
+* ArrayList 是 fail-fast 的典型代表，遍历的同时不能修改，尽快失败
+
+* CopyOnWriteArrayList 是 fail-safe 的典型代表，遍历的同时可以修改，原理是读写分离，修改后new建个集合，所以当时遍历的集合和修改后的集合不是一个集合。
+
+**提示**
+
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/list)中FailFastVsFailSafe
+
+
+### 9.LinkedList
 
 **要求**
 
