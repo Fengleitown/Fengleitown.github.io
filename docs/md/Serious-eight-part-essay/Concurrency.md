@@ -252,7 +252,7 @@ segment索引计算方式：2次hash后，取高  log2(clevel)  位，eg:clevel=
 
 segment小数组的索引计算方式：看小数组元素个数，eg:2个小数组元素个数，则是2的0次幂，则0是索引。
 
-[视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=87&vd_source=add76bce03794ff30f98753a5213643b)
+[视频讲解👈]**(https://www.bilibili.com/video/BV15b4y117RJ?p=87&vd_source=add76bce03794ff30f98753a5213643b)**
 
 **concurreentHashmap**
 
@@ -276,15 +276,61 @@ segment小数组的索引计算方式：看小数组元素个数，eg:2个小数
 * 扩容单位：以链表为单位从后向前迁移链表，迁移完成的将旧数组头节点替换为 ForwardingNode
 * 扩容时并发 get
   * 根据是否为 ForwardingNode 来决定是在新数组查找还是在旧数组查找，不会阻塞 🔒 
-  * 如果链表长度超过 1，则需要对节点进行复制（创建新节点），怕的是节点迁移后 next 指针改变
+  * 如果链表长度超过 1，则需要对节点进行复制（创建新节点），怕的是节点迁移后 next 指针改变，（***指针改变了查的就不准了，所以为了避免这种情况，需要对节点进行复制？  ❓ ❔ ***。）
   * 如果链表最后几个元素扩容后索引不变，则节点无需复制
 * 扩容时并发 put
   * 如果 put 的线程与扩容线程操作的链表是同一个，put 线程会阻塞🔒 
   * 如果 put 的线程操作的链表还未迁移完成，即头节点不是 ForwardingNode，则可以并发执行
-  * 如果 put 的线程操作的链表已经迁移完成，即头结点是 ForwardingNode，则可以协助扩容
+  * 如果 put 的线程操作的链表已经迁移完成，即头结点是 ForwardingNode，则可以协助扩容（比如说当前扩容线程正在迁移0-15，这时我这个put线程来了，又不能向新的map进行put操作，这时候就协助帮忙迁移16-31的数据，就是不让线程闲着，有事儿可干 💔 ）
 * 与 1.7 相比是懒惰初始化
 * capacity 代表预估的元素个数，capacity / factory 来计算出初始数组大小，需要贴近 $2^n$ eg:capacity= 11，则concurrentHashMap初始值是16，如果capacity= 16，则concurrentHashMap初始值是32
 * loadFactor 只在计算`初始` 💩  数组大小时被使用，之后扩容固定为 3/4
 * 超过树化阈值时的扩容问题，如果容量已经是 64，直接树化，否则在原来容量基础上做 3 轮扩容
+[视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=92&vd_source=add76bce03794ff30f98753a5213643b)
+## 8. ThreadLocal
 
- 
+面试题：谈谈对ThreadLocal的理解
+
+ThreadLocal的引入 👀 ：当多线程操作共享变量时，解决办法可以用加锁，或者cas重试的方式，来解决线程安全的问题，这里的ThreadLocal采用了另一种方式解决线程安全的问题。
+
+回答：
+
+* ThreadLocal `线程间`，可以实现【资源对象】的线程隔离，让每个线程各用各的【资源对象】，避免争用引发的线程安全问题
+* ThreadLocal `线程内`同时实现了线程内的资源共享
+
+**原理**
+
+每个线程内有一个 ThreadLocalMap 类型的成员变量，用来存储资源对象
+
+* 调用 set 方法，就是以 ThreadLocal 自己作为 key，资源对象作为 value，放入当前线程的 ThreadLocalMap 集合中
+* 调用 get 方法，就是以 ThreadLocal 自己作为 key，到当前线程中查找关联的资源值
+* 调用 remove 方法，就是以 ThreadLocal 自己作为 key，移除当前线程关联的资源值
+
+原理解释 💁 ：起到隔离作用的是每个线程内的ThreadLocalMap集合，ThreadLocal起到的作用是关联资源对象。
+
+ThreadLocalMap 的一些特点
+
+* key 的 hash 值统一分配
+* 初始容量 16，扩容因子 2/3，扩容容量翻倍
+* key 索引冲突后用`开放寻址法`(找间隙，从索引0开始有空就插，不需要像之前的Map那样拉链寻址法)解决冲突
+
+*面试题 ❓ ：为什么ThreadLocalMap中的key（即ThreadLocal）要设计为弱引用？*
+
+**弱引用 key**
+
+ThreadLocalMap 中的 key 被设计为弱引用，原因如下
+
+* Thread 可能需要长时间运行（如线程池中的线程），如果 key 不再使用，自己没有好的编程习惯，没有释放掉这些内存，则需要在内存不足（GC垃圾回收）时释放其占用的内存，如果是强引用GC也干不掉它们。
+
+注 ⚠️ ：但GC仅是让key的内存释放，后续还要根据key是否为Null来进一步释放值的内存
+
+**值内存释放时机（回收时机）**
+
+* 被动 GC 释放 key
+  * 仅是让 key 的内存释放，关联 value 的内存并不会释放
+* 懒惰被动释放 value
+  * get key 时，发现是 null key，则释放其 value 内存
+  * set key 时，会使用启发式扫描，清除临近的 null key 的 value 内存，启发次数与①元素个数，②是否发现 null key 有关，发现了Null就多扫描几次，没发现Null就少扫描几次
+* 主动 💥`remove` 释放 key，value
+  * 会同时释放 key，value 的内存，也会清除临近的 null key 的 value 内存
+  *  💁 推荐使用它，因为一般使用 ThreadLocal 时都把它作为静态变量（即强引用），因此无法被动依靠 GC 回收
