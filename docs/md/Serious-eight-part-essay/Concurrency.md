@@ -165,7 +165,7 @@
 >       注意：本例经实践检验是编译器优化导致的可见性问题
 >[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02.threadsafe)中Reordering 演示有序性
 >  * 需要打成 jar 包后测试
->* [可同时参考视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=79&vd_source=add76bce03794ff30f98753a5213643b)
+>* [视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=79&vd_source=add76bce03794ff30f98753a5213643b)
 
 
 
@@ -239,3 +239,12 @@ U.compareAndSetInt(account, BALANCE, old, news)
 ![](/assets/img/ext-img/hashTable.jpg)
 
 ![](/assets/img/ext-img/hashTable.jpg)
+
+**索引的运算：**
+
+segment索引计算方式：2次hash后，取高  log2(clevel)  位，eg:clevel=16，则取高四位，clevel=32,则取高5位。
+
+segment小数组的索引计算方式：看小数组元素个数，eg:2个小数组元素个数，则是2的0次幂，则0是索引。
+
+[视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=87&vd_source=add76bce03794ff30f98753a5213643b)
+
