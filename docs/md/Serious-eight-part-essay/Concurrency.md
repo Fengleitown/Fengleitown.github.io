@@ -230,7 +230,9 @@ U.compareAndSetInt(account, BALANCE, old, news)
 
 **HashTable**
 
-初始值：11，扩容：容量乘2+1，加载因子：0.75。不需要二次hash，容量不是2的倍数，有比较好的hash分散性，不需要2次hash。
+初始值clevel：11，扩容：容量乘2+1，加载因子：0.75。不需要二次hash，容量不是2的倍数，有比较好的hash分散性，不需要2次hash。
+
+指定初始值clevel后segment数组大小就指定`不变`了，加载因子只影响小数组的扩容。
 
 可以看到直接算出正整数的最大位最大值，然后直接取模运算了。
 
