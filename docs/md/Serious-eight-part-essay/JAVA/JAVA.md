@@ -621,5 +621,6 @@ null
   * 即 $32 ∗h -h $
   * 即 $2^5  ∗h -h$
   * 即 $h≪5  -h$
+可看到hashcode为31时，散列效果比较好
 ![](/assets/img/ext-img/hashmap-31.jpg)       
 ![](/assets/img/ext-img/hashmap-31-11.jpg)
