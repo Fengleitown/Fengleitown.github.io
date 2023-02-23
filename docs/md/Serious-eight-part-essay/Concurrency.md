@@ -228,11 +228,17 @@ U.compareAndSetInt(account, BALANCE, old, news)
 - 演示并发put。
 - 演示并发扩容，说明三个问题forwardingNode，扩容时的get,扩容时的put。
 
+**Hashtable 对比 ConcurrentHashMap**
+
+* Hashtable 与 ConcurrentHashMap 都是线程安全的 Map 集合
+* Hashtable 并发度低，整个 Hashtable 对应一把锁，同一时刻，只能有一个线程操作它
+* ConcurrentHashMap 并发度高，整个 ConcurrentHashMap 对应多把锁，只要线程访问的是不同锁，那么不会冲突
+
 **HashTable**
 
-初始值clevel：11，扩容：容量乘2+1，加载因子：0.75。不需要二次hash，容量不是2的倍数，有比较好的hash分散性，不需要2次hash。
+初始值clevel（并发度）：11，扩容：容量乘2+1，加载因子：0.75。不需要二次hash，容量不是2的倍数，有比较好的hash分散性，不需要2次hash。
 
-指定初始值clevel后segment数组大小就指定`不变`了，加载因子只影响小数组的扩容。
+指定初始值clevel（并发度）后segment数组大小就指定`不变`了，加载因子只影响小数组的扩容 👐 。
 
 可以看到直接算出正整数的最大位最大值，然后直接取模运算了。
 
@@ -240,7 +246,7 @@ U.compareAndSetInt(account, BALANCE, old, news)
 
 ![](/assets/img/ext-img/hashTable.jpg)
 
-**索引的运算：**
+******HashTable索引的运算：**
 
 segment索引计算方式：2次hash后，取高  log2(clevel)  位，eg:clevel=16，则取高四位，clevel=32,则取高5位。
 
@@ -248,3 +254,37 @@ segment小数组的索引计算方式：看小数组元素个数，eg:2个小数
 
 [视频讲解👈](https://www.bilibili.com/video/BV15b4y117RJ?p=87&vd_source=add76bce03794ff30f98753a5213643b)
 
+**concurreentHashmap**
+
+扩容：指定初始值clevel时segment就不变了。小数组可根据加载因子扩容，元素个数 `> `小数组 X 加载因子则扩容。每个segment下的小数组扩容互不影响，各扩各的。
+
+**ConcurrentHashMap 1.7**
+
+* 数据结构：`Segment(大数组) + HashEntry(小数组) + 链表`，每个 Segment 对应一把锁，如果多个线程访问不同的 Segment，则不会冲突
+* 并发度：Segment 数组大小即并发度，决定了同一时刻最多能有多少个线程并发访问。Segment 数组不能扩容，意味着并发度在 ConcurrentHashMap 创建时就固定了
+* 索引计算
+  * 假设大数组长度是 $2^m$，key 在大数组内的索引是 key 的二次 hash 值的高 m 位
+  * 假设小数组长度是 $2^n$，key 在小数组内的索引是 key 的二次 hash 值的低 n 位
+* 扩容：每个小数组的扩容相对独立，小数组在超过扩容因子时会触发扩容，每次扩容翻倍
+* Segment[0] 原型：创建时就建立小数组，属于饿汉式加载。首次创建其它小数组时，会以此原型为依据，数组长度，扩容因子都会以原型为准(相当于设计模式中的原型模式)
+
+**ConcurrentHashMap 1.8**
+
+* 数据结构：`Node 数组 + 链表或红黑树`，数组的每个头节点作为锁，如果多个线程访问的头节点不同，则不会冲突。首次生成头节点时如果发生竞争，利用 cas 而非 syncronized，进一步提升性能
+* 并发度：Node 数组有多大，并发度就有多大，与 1.7 不同，Node 数组可以扩容 👐 
+* 扩容条件：Node 数组`满` 3/4 时就会扩容 👐 
+* 扩容单位：以链表为单位从后向前迁移链表，迁移完成的将旧数组头节点替换为 ForwardingNode
+* 扩容时并发 get
+  * 根据是否为 ForwardingNode 来决定是在新数组查找还是在旧数组查找，不会阻塞 🔒 
+  * 如果链表长度超过 1，则需要对节点进行复制（创建新节点），怕的是节点迁移后 next 指针改变
+  * 如果链表最后几个元素扩容后索引不变，则节点无需复制
+* 扩容时并发 put
+  * 如果 put 的线程与扩容线程操作的链表是同一个，put 线程会阻塞🔒 
+  * 如果 put 的线程操作的链表还未迁移完成，即头节点不是 ForwardingNode，则可以并发执行
+  * 如果 put 的线程操作的链表已经迁移完成，即头结点是 ForwardingNode，则可以协助扩容
+* 与 1.7 相比是懒惰初始化
+* capacity 代表预估的元素个数，capacity / factory 来计算出初始数组大小，需要贴近 $2^n$ eg:capacity= 11，则concurrentHashMap初始值是16，如果capacity= 16，则concurrentHashMap初始值是32
+* loadFactor 只在计算`初始` 💩  数组大小时被使用，之后扩容固定为 3/4
+* 超过树化阈值时的扩容问题，如果容量已经是 64，直接树化，否则在原来容量基础上做 3 轮扩容
+
+ 
