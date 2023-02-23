@@ -213,18 +213,26 @@ U.compareAndSetInt(account, BALANCE, old, news)
 
 ## 7. Hashtable vs ConcurrentHashMap
 
-面试题：Hashtable与ConcurrentHashMap有什么区别？
+*面试题：Hashtable与ConcurrentHashMap有什么区别？*
 
 1.Hashtable与ConcurrentHashMap都是线程安全的集合
 
-2.Hashtable并发度低，整个Hashtable对应一把锁，同一时刻，只能有一个线程操作它。
+2.key和value都不能为空
 
-3.1.8开始之前ConcurrentHashMap使用了Segment+数组+链表的结构，每个Segmen对应一把锁，如果多个线程访问不同的Segment，则不会冲突。
+3.Hashtable并发度低，整个Hashtable对应一把锁，同一时刻，只能有一个线程操作它，其他线程到阻塞队列等待。
 
-4.1.8开始ConcurrentHashMap的数据结构类似HashMap，数组+链表+红黑树，将数组的每个头节点作为锁，如果多个线程访问的头节点不同，则不会冲突。
+4.1.8开始之前ConcurrentHashMap使用了Segment+数组+链表的结构，每个Segmen对应一把锁，如果多个线程访问不同的Segment，则不会冲突。
+
+5.1.8开始ConcurrentHashMap的数据结构类似HashMap，数组+链表+红黑树，将数组的每个头节点作为锁，如果多个线程访问的头节点不同，则不会冲突。
 
 - 演示并发put。
 - 演示并发扩容，说明三个问题forwardingNode，扩容时的get,扩容时的put。
->[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day02)中
 
-先再去搞下基础篇再回来弄这个。
+**HashTable**
+
+初始值：11，扩容：容量乘2+1，加载因子：0.75。不需要二次hash，容量不是2的倍数，有比较好的hash分散性，不需要2次hash。
+
+可以看到直接算出正整数的最大位最大值，然后直接取模运算了。
+
+![](/assets/img/ext-img/hashTable.jpg)
+
