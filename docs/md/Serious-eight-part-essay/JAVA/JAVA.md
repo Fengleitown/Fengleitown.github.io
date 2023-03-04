@@ -402,8 +402,7 @@ Fail-Fast 与 Fail-Safe
 
 **提示**
 
->[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/list)中FailFastVsFailSafe
-
+>[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/list/FailFastVsFailSafe.java)
 
 ### 9.LinkedList
 
@@ -465,7 +464,7 @@ Fail-Fast 与 Fail-Safe
   
 - 举个例子 🌰 证明一下啊。
 
-  - >[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/map)中HashMapDistribution.java
+  - >[代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/map/HashMapDistribution.java)
 
     结果为： 👇 
 
@@ -597,14 +596,14 @@ class java.util.HashMap
 
 存在线程之间会覆盖数据的问题。
 
-> [代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/map)中	HashMapMissData.java
+> [代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/map/HashMapMissData.java)
 
 #### 6）key 的设计
 
 面试题：key能否为null,作为key的对象有什么要求？
 
 - hashmap的key可以为Null,但其他map实现则不然。
-- 作为 key 的对象，必须实现 hashCode （为了key在整个hashMap中有更好的分布性，提高查询性能）和 equals（万一两个key计算出来的结果一样，要比较看他们是不是相同的对象），并且 key 的内容不能修改（不可变）> [代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/map)中HashMapMutableKey
+- 作为 key 的对象，必须实现 hashCode （为了key在整个hashMap中有更好的分布性，提高查询性能）和 equals（万一两个key计算出来的结果一样，要比较看他们是不是相同的对象），并且 key 的内容不能修改（不可变）> [代码示例👈](https://github.com/Fengleitown/BLOG-code/tree/main/src/main/java/day01/map/HashMapMutableKey.java)
 
 ```
 // 打印出的结果，可见改了map的属性后，需要重新计算hashcode值，原来的找不到了，查找的就是null.
