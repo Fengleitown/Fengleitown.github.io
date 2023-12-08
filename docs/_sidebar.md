@@ -1,30 +1,30 @@
 - [:octocat: 首页](/README)
 - :memo:  目录
-  - **<font color="#AD523D" size="4">面试篇</font>**(初中级糊弄版)
-    - [自我介绍](/md/Interview-eight-part-essay/IntroduceMyself.md)
-    - [JAVA基础](/md/Interview-eight-part-essay/JAVABasics.md)
-    - [线程并发](/md/Interview-eight-part-essay/ThreadConcurrency.md) 
-    - [数据库](/md/Interview-eight-part-essay/Database.md)
-    - [NoSQL](/md/Interview-eight-part-essay/NoSQL.md)
-    - [Spring、SpringBoot](/md/Interview-eight-part-essay/Spring、SpringBoot.md)
-    - [设计模式](/md/Interview-eight-part-essay/DesignPattern.md)
-    - [微服务](/md/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
-    - [MQ](/md/Interview-eight-part-essay/MQ.md)
-    - [Elasticsearch](/md/Interview-eight-part-essay/ES.md)
-    - [JVM](/md/Interview-eight-part-essay/JVM.md)
-    - [面试场景](/md/Interview-eight-part-essay/InterviewScene.md)
-    - [工作中问题及方案](/md/Interview-eight-part-essay/WorkProblems.md)
-  - **<font color="#AD523D" size="4">面试篇</font>**(中高级走心版) 
-    - [基础篇](/md/Serious-eight-part-essay/JAVA/JAVA.md)
-    - [并发篇](/md/Serious-eight-part-essay/Concurrency.md)
-    - [虚拟机](/md/Serious-eight-part-essay/JVMChapter.md) 
-    - [框架篇](/md/Serious-eight-part-essay/Frame.md) 
+  - **<font color="#AD523D" size="4">技能学习篇</font>**     
+  - **<font color="#AD523D" size="4">自己折腾篇</font>**
+  - **<font color="#AD523D" size="4">面试篇</font>**(基础)
+    - [自我介绍](/document/basicInterview/IntroduceMyself.md)
+    - [JAVA基础](/document/basicInterview/JAVABasics.md)
+    - [线程并发](/document/basicInterview/ThreadConcurrency.md) 
+    - [数据库](/document/basicInterview/Database.md)
+    - [NoSQL](/document/basicInterview/NoSQL.md)
+    - [Spring、SpringBoot](/document/basicInterview/Spring、SpringBoot.md)
+    - [设计模式](/document/basicInterview/DesignPattern.md)
+    - [微服务](/document/idea-plugin/2021-08-27-技术调研IDEA插件怎么开发.md)
+    - [MQ](/document/basicInterview/MQ.md)
+    - [Elasticsearch](/document/basicInterview/ES.md)
+    - [JVM](/document/basicInterview/JVM.md)
+    - [面试场景](/document/basicInterview/InterviewScene.md)
+    - [工作中问题及方案](/document/Interview/WorkProblems.md)
+  - **<font color="#AD523D" size="4">面试篇</font>**(上难度) 
+    - [基础篇](/document/seniorInterview/JAVA/JAVA.md)
+    - [并发篇](/document/seniorInterview/Concurrency.md)
+    - [虚拟机](/document/seniorInterview/JVMChapter.md) 
+    - [框架篇](/document/seniorInterview/Frame.md) 
 
  
  
  
  
-  - **<font color="#AD523D" size="4">技能学习篇</font>**     
-  - **<font color="#AD523D" size="4">自己折腾篇</font>**
   
 
