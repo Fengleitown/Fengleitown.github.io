@@ -2,7 +2,7 @@
 - :memo:  目录
   - **<font color="#AD523D" size="4">技能学习篇</font>**     
   - **<font color="#AD523D" size="4">自己折腾篇</font>**
-    - [蓝兔支付对接-上篇](/document/fiddleTechnology/对接蓝兔支付-上篇.md)
+    - [蓝兔支付对接-上篇](/document/fiddleTechnology/ltzf-pre.md)
   - **<font color="#AD523D" size="4">面试篇</font>**(基础)
     - [自我介绍](/document/basicInterview/IntroduceMyself.md)
     - [JAVA基础](/document/basicInterview/JAVABasics.md)
